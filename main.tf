@@ -39,15 +39,16 @@ module "network" {
   source = "./modules/network"
 
   compartment_id = var.compartment_id
-  vcn_cidr      = var.vcn_cidr
-  region        = var.region
+  vcn_cidr       = var.vcn_cidr
+  region         = var.region
+  cluster_name   = var.cluster_name
 }
 
 # OKE Cluster Configuration
 module "oke" {
   source = "./modules/oke"
 
-  compartment_id      = var.compartment_id
+  compartment_id     = var.compartment_id
   vcn_id             = module.network.vcn_id
   subnet_ids         = module.network.subnet_ids
   cluster_name       = var.cluster_name
@@ -56,11 +57,15 @@ module "oke" {
   node_shape         = var.node_shape
   node_ocpus         = var.node_ocpus
   node_memory_in_gbs = var.node_memory_in_gbs
+  ssh_public_key     = var.ssh_public_key
 }
 
 # Kubernetes Add-ons Configuration
 module "k8s_addons" {
   source = "./modules/k8s_addons"
+
+  cluster_name = var.cluster_name
+  region       = var.region
 
   depends_on = [module.oke]
 } 

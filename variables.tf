@@ -44,7 +44,7 @@ variable "cluster_name" {
 variable "kubernetes_version" {
   description = "Kubernetes version"
   type        = string
-  default     = "v1.28.2"
+  default     = "v1.32.1"
 }
 
 variable "node_pool_size" {
@@ -69,4 +69,9 @@ variable "node_memory_in_gbs" {
   description = "Amount of memory in GBs for each node"
   type        = number
   default     = 32
-} 
+}
+
+variable "ssh_public_key" {
+  description = "SSH public key for node access"
+  type        = string
+}

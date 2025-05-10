@@ -33,16 +33,6 @@ resource "oci_containerengine_node_pool" "node_pool" {
       availability_domain = data.oci_identity_availability_domains.ads.availability_domains[0].name
       subnet_id          = var.subnet_ids["private"]
     }
-
-    placement_configs {
-      availability_domain = data.oci_identity_availability_domains.ads.availability_domains[1].name
-      subnet_id          = var.subnet_ids["private"]
-    }
-
-    placement_configs {
-      availability_domain = data.oci_identity_availability_domains.ads.availability_domains[2].name
-      subnet_id          = var.subnet_ids["private"]
-    }
   }
 
   node_shape_config {
