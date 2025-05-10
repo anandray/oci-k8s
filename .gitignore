@@ -45,8 +45,12 @@ operations/variable-scripts/variable.json
 # My additions
 *.tfvars
 terraform.tfvars
+*/terraform.tfvars
 ./terraform.tfvars
 .terraform.lock.hcl
-.*.lock.hcl
+*/.terraform.lock.hcl
+*.lock.hcl
+*/*.lock.hcl
 
 *.plan
+*/*.plan
