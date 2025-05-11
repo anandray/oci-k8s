@@ -58,6 +58,7 @@ module "oke" {
   node_ocpus         = var.node_ocpus
   node_memory_in_gbs = var.node_memory_in_gbs
   ssh_public_key     = var.ssh_public_key
+  node_image_id      = var.node_image_id
 }
 
 # Kubernetes Add-ons Configuration

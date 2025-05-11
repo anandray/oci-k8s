@@ -40,6 +40,12 @@ resource "oci_containerengine_node_pool" "node_pool" {
     memory_in_gbs = var.node_memory_in_gbs
   }
 
+  node_source_details {
+    image_id                = var.node_image_id
+    source_type            = "IMAGE"
+    boot_volume_size_in_gbs = 50
+  }
+
   initial_node_labels {
     key   = "node.kubernetes.io/instance-type"
     value = var.node_shape
@@ -50,6 +56,27 @@ resource "oci_containerengine_node_pool" "node_pool" {
 
 data "oci_identity_availability_domains" "ads" {
   compartment_id = var.compartment_id
+}
+
+data "oci_core_images" "node_images" {
+  compartment_id           = var.compartment_id
+  operating_system         = "Oracle Linux"
+  operating_system_version = "8"
+  state                   = "AVAILABLE"
+  sort_by                 = "TIMECREATED"
+  sort_order              = "DESC"
+
+  filter {
+    name   = "display_name"
+    values = ["Oracle-Linux-8-.*"]
+    regex  = true
+  }
+
+  filter {
+    name   = "display_name"
+    values = ["aarch64"]
+    regex  = false
+  }
 }
 
 resource "oci_load_balancer" "load_balancer" {

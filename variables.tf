@@ -75,3 +75,8 @@ variable "ssh_public_key" {
   description = "SSH public key for node access"
   type        = string
 }
+
+variable "node_image_id" {
+  description = "OCID of the node image to use"
+  type        = string
+}
